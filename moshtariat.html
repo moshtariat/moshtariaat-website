@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moshtariat — Procurement & Logistics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0D1B3E;
+  --navy-mid: #162550;
+  --navy-light: #1e3a6e;
+  --blue: #2D7DD2;
+  --blue-light: #4BA3F5;
+  --blue-pale: #A8D4FF;
+  --white: #FFFFFF;
+  --off-white: #F4F7FC;
+  --gray: #8090A8;
+  --gray-light: #E2EAF4;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--white);
+  color: var(--navy);
+  overflow-x: hidden;
+}
+
+h1,h2,h3,h4,h5 { font-family: 'Syne', sans-serif; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 60px;
+  background: rgba(13,27,62,0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  transition: all .3s;
+}
+
+.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.nav-logo svg { width: 42px; height: 42px; }
+.nav-logo-text { color: var(--white); }
+.nav-logo-text span:first-child { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; letter-spacing: .5px; display: block; }
+.nav-logo-text span:last-child { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--blue-light); display: block; }
+
+.nav-links { display: flex; align-items: center; gap: 36px; }
+.nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: .3px; transition: color .2s; }
+.nav-links a:hover { color: var(--blue-light); }
+
+.nav-ctas { display: flex; align-items: center; gap: 12px; }
+.btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,0.25); color: var(--white); padding: 9px 20px; border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: all .2s; text-decoration: none; }
+.btn-ghost:hover { border-color: var(--blue-light); color: var(--blue-light); }
+.btn-primary { background: linear-gradient(135deg, var(--blue), var(--blue-light)); color: var(--white); border: none; padding: 10px 22px; border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all .2s; text-decoration: none; }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(45,125,210,0.4); }
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  background: var(--navy);
+  position: relative;
+  overflow: hidden;
+  display: flex; align-items: center;
+  padding: 120px 60px 80px;
+}
+
+.hero-grid-bg {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(45,125,210,0.06) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(45,125,210,0.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.hero-glow {
+  position: absolute;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(45,125,210,0.18) 0%, transparent 70%);
+  right: -100px; top: 50%; transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.hero-glow2 {
+  position: absolute;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(75,163,245,0.12) 0%, transparent 70%);
+  left: 30%; bottom: -100px;
+  pointer-events: none;
+}
+
+.hero-content { position: relative; z-index: 2; max-width: 680px; }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(45,125,210,0.15); border: 1px solid rgba(45,125,210,0.3);
+  color: var(--blue-light); padding: 6px 16px; border-radius: 40px;
+  font-size: 12px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
+  margin-bottom: 32px;
+}
+.hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--blue-light); animation: pulse 2s infinite; }
+
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.3)} }
+
+.hero-title {
+  font-size: clamp(36px, 5vw, 62px);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.08;
+  margin-bottom: 28px;
+}
+
+.hero-title .accent {
+  background: linear-gradient(90deg, var(--blue-light), #89CFFF);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+.hero-sub {
+  font-size: 18px; font-weight: 300; color: rgba(255,255,255,0.65);
+  line-height: 1.7; margin-bottom: 48px; max-width: 520px;
+}
+
+.hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 64px; }
+.btn-hero { padding: 16px 32px; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all .25s; text-decoration: none; font-family: 'DM Sans', sans-serif; }
+.btn-hero-primary { background: linear-gradient(135deg, var(--blue), var(--blue-light)); color: var(--white); border: none; }
+.btn-hero-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(45,125,210,0.45); }
+.btn-hero-outline { background: transparent; border: 1.5px solid rgba(255,255,255,0.25); color: var(--white); }
+.btn-hero-outline:hover { border-color: var(--blue-light); color: var(--blue-light); }
+
+.hero-stats { display: flex; gap: 48px; }
+.stat-item { }
+.stat-num { font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 800; color: var(--white); }
+.stat-num span { color: var(--blue-light); }
+.stat-label { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: .5px; margin-top: 2px; }
+
+.hero-visual {
+  position: absolute; right: 60px; top: 50%; transform: translateY(-50%);
+  width: 480px; z-index: 2;
+}
+
+/* Animated dashboard card */
+.hero-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 28px;
+  backdrop-filter: blur(16px);
+  animation: floatCard 5s ease-in-out infinite;
+}
+@keyframes floatCard { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+
+.hero-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+.hero-card-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--white); }
+.hero-card-badge { background: rgba(75,163,245,0.2); color: var(--blue-light); font-size: 11px; padding: 4px 10px; border-radius: 20px; font-weight: 500; }
+
+.order-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.order-row:last-child { border-bottom: none; }
+.order-info { display: flex; align-items: center; gap: 12px; }
+.order-icon { width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+.order-name { font-size: 13px; font-weight: 500; color: var(--white); }
+.order-cat { font-size: 11px; color: var(--gray); }
+.order-price { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--blue-light); }
+
+.hero-card-footer { margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; }
+.card-total-label { font-size: 12px; color: var(--gray); }
+.card-total { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: var(--white); }
+.card-total span { font-size: 12px; font-weight: 400; color: var(--gray); }
+
+.savings-pill { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: #4ade80; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+
+/* Mini chart */
+.mini-chart { margin-top: 20px; }
+.chart-bars { display: flex; align-items: flex-end; gap: 6px; height: 50px; }
+.bar { flex: 1; border-radius: 4px 4px 0 0; background: rgba(45,125,210,0.3); position: relative; transition: all .3s; }
+.bar.active { background: linear-gradient(180deg, var(--blue-light), var(--blue)); }
+
+/* Floating mini-cards */
+.mini-card {
+  position: absolute;
+  background: rgba(13,27,62,0.9); border: 1px solid rgba(45,125,210,0.3);
+  border-radius: 10px; padding: 12px 16px;
+  backdrop-filter: blur(12px);
+  font-size: 12px;
+}
+.mini-card-1 { right: 40px; top: 15%; animation: floatCard 4s ease-in-out infinite .5s; }
+.mini-card-2 { left: -20px; bottom: 20%; animation: floatCard 4.5s ease-in-out infinite 1s; }
+.mini-card-label { color: var(--gray); font-size: 10px; letter-spacing: .5px; text-transform: uppercase; }
+.mini-card-value { font-family: 'Syne', sans-serif; font-weight: 800; color: var(--white); font-size: 18px; margin-top: 2px; }
+.mini-card-change { color: #4ade80; font-size: 10px; }
+
+/* ── SECTION BASE ── */
+section { padding: 100px 60px; }
+.section-tag { font-size: 11px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 16px; }
+.section-title { font-size: clamp(28px, 3.5vw, 46px); font-weight: 800; color: var(--navy); line-height: 1.12; margin-bottom: 20px; }
+.section-sub { font-size: 17px; font-weight: 300; color: #5a6a82; line-height: 1.7; max-width: 560px; }
+.section-header { margin-bottom: 64px; }
+.center { text-align: center; }
+.center .section-sub { margin: 0 auto; }
+
+/* ── CALCULATOR ── */
+#calculator { background: var(--off-white); }
+.calc-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+.calc-box {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 44px;
+  box-shadow: 0 4px 40px rgba(13,27,62,0.08);
+}
+.calc-field { margin-bottom: 28px; }
+.calc-label { font-size: 13px; font-weight: 600; color: var(--navy); letter-spacing: .3px; margin-bottom: 10px; display: block; }
+.calc-input {
+  width: 100%;
+  padding: 14px 20px;
+  border: 1.5px solid var(--gray-light);
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  color: var(--navy);
+  transition: border-color .2s;
+  outline: none;
+  background: var(--off-white);
+}
+.calc-input:focus { border-color: var(--blue); background: var(--white); }
+
+.calc-slider { -webkit-appearance: none; width: 100%; height: 6px; background: var(--gray-light); border-radius: 3px; outline: none; }
+.calc-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--blue); cursor: pointer; border: 3px solid var(--white); box-shadow: 0 2px 8px rgba(45,125,210,0.4); }
+
+.calc-run {
+  width: 100%; padding: 16px; background: linear-gradient(135deg, var(--navy), var(--navy-light));
+  color: var(--white); border: none; border-radius: 10px;
+  font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; cursor: pointer;
+  transition: all .25s; margin-top: 8px; letter-spacing: .5px;
+}
+.calc-run:hover { background: linear-gradient(135deg, var(--navy-light), var(--blue)); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(13,27,62,0.25); }
+
+.calc-results { background: var(--navy); border-radius: 20px; padding: 44px; color: var(--white); }
+.calc-results h3 { font-size: 22px; font-weight: 800; color: var(--white); margin-bottom: 32px; }
+.result-metric { margin-bottom: 28px; }
+.result-label { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+.result-value { font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 800; }
+.result-green { color: #4ade80; }
+.result-blue { color: var(--blue-light); }
+
+.result-bar { height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; margin-top: 8px; overflow: hidden; }
+.result-bar-fill { height: 100%; border-radius: 4px; transition: width 1s ease; }
+.result-bar-fill.green { background: linear-gradient(90deg, #22c55e, #4ade80); }
+.result-bar-fill.blue { background: linear-gradient(90deg, var(--blue), var(--blue-light)); }
+
+.calc-disclaimer { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 28px; line-height: 1.6; }
+
+/* ── SERVICES ── */
+#services { background: var(--white); }
+.services-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+.service-card {
+  background: var(--off-white);
+  border-radius: 16px; padding: 32px 24px;
+  transition: all .3s; cursor: pointer;
+  border: 1.5px solid transparent;
+  position: relative; overflow: hidden;
+}
+.service-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--blue), var(--blue-light));
+  opacity: 0; transition: opacity .3s;
+}
+.service-card:hover { transform: translateY(-6px); border-color: var(--blue-light); box-shadow: 0 20px 48px rgba(45,125,210,0.15); }
+.service-card:hover .service-icon { background: rgba(255,255,255,0.15); }
+.service-card:hover .service-title { color: var(--white); }
+.service-card:hover .service-desc { color: rgba(255,255,255,0.7); }
+.service-card:hover::before { opacity: 1; }
+.service-icon {
+  width: 60px; height: 60px; border-radius: 14px;
+  background: rgba(45,125,210,0.1);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px; position: relative; z-index: 1;
+  transition: background .3s;
+  font-size: 26px;
+}
+.service-title { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 10px; position: relative; z-index: 1; transition: color .3s; }
+.service-desc { font-size: 13px; color: var(--gray); line-height: 1.6; position: relative; z-index: 1; transition: color .3s; }
+.service-tag { margin-top: 16px; display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--blue); background: rgba(45,125,210,0.1); padding: 4px 10px; border-radius: 20px; position: relative; z-index: 1; }
+
+/* ── CLIENT PORTAL ── */
+#portal { background: var(--navy); padding: 100px 60px; }
+.portal-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.portal-content .section-tag { color: var(--blue-light); }
+.portal-content .section-title { color: var(--white); }
+.portal-content .section-sub { color: rgba(255,255,255,0.6); }
+.feature-list { margin-top: 40px; display: flex; flex-direction: column; gap: 20px; }
+.feature-item { display: flex; gap: 16px; align-items: flex-start; }
+.feature-dot { width: 40px; height: 40px; border-radius: 10px; background: rgba(45,125,210,0.2); border: 1px solid rgba(45,125,210,0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 18px; }
+.feature-text h4 { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+.feature-text p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+/* Portal mockup */
+.portal-mockup {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px; padding: 24px;
+  backdrop-filter: blur(12px);
+}
+.mockup-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+.mockup-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--white); }
+.mockup-badge { background: rgba(74,222,128,0.15); color: #4ade80; font-size: 10px; padding: 4px 10px; border-radius: 20px; font-weight: 600; }
+
+.mockup-item { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.04); border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; }
+.mockup-item-left { display: flex; align-items: center; gap: 12px; }
+.mockup-item-icon { width: 32px; height: 32px; border-radius: 8px; background: rgba(45,125,210,0.2); display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.mockup-item-name { font-size: 13px; font-weight: 500; color: var(--white); }
+.mockup-item-qty { font-size: 11px; color: var(--gray); }
+.mockup-qty-control { display: flex; align-items: center; gap: 10px; }
+.qty-btn { width: 26px; height: 26px; border-radius: 6px; background: rgba(45,125,210,0.2); border: none; color: var(--blue-light); cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+.qty-num { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--white); }
+
+.ai-suggestion { background: rgba(45,125,210,0.1); border: 1px solid rgba(45,125,210,0.25); border-radius: 10px; padding: 14px 16px; margin-top: 14px; display: flex; gap: 10px; align-items: flex-start; }
+.ai-icon { font-size: 18px; }
+.ai-text { font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.5; }
+.ai-text strong { color: var(--blue-light); }
+
+.invoice-strip { background: rgba(255,255,255,0.04); border-radius: 10px; padding: 16px; margin-top: 16px; display: flex; justify-content: space-between; align-items: center; }
+.invoice-label { font-size: 12px; color: var(--gray); }
+.invoice-value { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; color: var(--white); }
+.invoice-tag { font-size: 10px; color: var(--blue-light); background: rgba(45,125,210,0.15); padding: 3px 8px; border-radius: 20px; }
+
+/* ── TRUST ── */
+#trust { background: var(--off-white); }
+.trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.trust-card { background: var(--white); border-radius: 20px; padding: 40px; border: 1.5px solid var(--gray-light); transition: all .3s; }
+.trust-card:hover { border-color: var(--blue); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(13,27,62,0.08); }
+.trust-num { font-family: 'Syne', sans-serif; font-size: 52px; font-weight: 800; color: var(--gray-light); line-height: 1; margin-bottom: 20px; }
+.trust-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
+.trust-text { font-size: 14px; color: var(--gray); line-height: 1.7; }
+.trust-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(45,125,210,0.1); display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 20px; }
+
+/* ── SUSTAINABILITY ── */
+#sustainability {
+  background: var(--navy);
+  position: relative; overflow: hidden;
+}
+.sustain-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 70% 50%, rgba(34,197,94,0.07) 0%, transparent 60%);
+}
+.sustain-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; position: relative; z-index: 2; }
+.sustain-content .section-tag { color: #4ade80; }
+.sustain-content .section-title { color: var(--white); }
+.sustain-content .section-sub { color: rgba(255,255,255,0.6); }
+.eco-pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
+.eco-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 20px; }
+.eco-emoji { font-size: 24px; margin-bottom: 10px; }
+.eco-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+.eco-text { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+.sustain-visual { position: relative; }
+.sustain-circle-outer { width: 320px; height: 320px; border-radius: 50%; border: 1px solid rgba(34,197,94,0.2); display: flex; align-items: center; justify-content: center; margin: 0 auto; animation: rotateSlow 20s linear infinite; }
+.sustain-circle-inner { width: 220px; height: 220px; border-radius: 50%; border: 1px solid rgba(34,197,94,0.3); background: rgba(34,197,94,0.05); display: flex; align-items: center; justify-content: center; flex-direction: column; animation: rotateSlow 20s linear infinite reverse; }
+@keyframes rotateSlow { to{transform:rotate(360deg)} }
+.sustain-center-text { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: #4ade80; text-align: center; line-height: 1.4; }
+.sustain-dot { position: absolute; width: 12px; height: 12px; border-radius: 50%; background: #4ade80; }
+
+/* ── BLOG ── */
+#blog { background: var(--white); }
+.blog-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 24px; }
+.blog-card { border-radius: 16px; overflow: hidden; border: 1.5px solid var(--gray-light); transition: all .3s; cursor: pointer; }
+.blog-card:hover { border-color: var(--blue); box-shadow: 0 12px 32px rgba(13,27,62,0.08); transform: translateY(-4px); }
+.blog-thumb {
+  height: 200px; background: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.blog-card.featured .blog-thumb { height: 240px; }
+.blog-thumb-pattern {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(45,125,210,0.12) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(45,125,210,0.12) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+.blog-thumb-icon { font-size: 48px; position: relative; z-index: 1; }
+.blog-body { padding: 24px; }
+.blog-cat { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; }
+.blog-title { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--navy); line-height: 1.35; margin-bottom: 12px; }
+.blog-card.featured .blog-title { font-size: 22px; }
+.blog-excerpt { font-size: 13px; color: var(--gray); line-height: 1.65; }
+.blog-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; font-size: 11px; color: var(--gray); }
+
+/* ── CTA SECTION ── */
+#cta {
+  background: linear-gradient(135deg, var(--navy), var(--navy-light));
+  text-align: center; padding: 100px 60px;
+  position: relative; overflow: hidden;
+}
+#cta::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(45,125,210,0.08) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(45,125,210,0.08) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+.cta-inner { position: relative; z-index: 1; }
+.cta-title { font-size: clamp(32px, 4vw, 54px); font-weight: 800; color: var(--white); margin-bottom: 20px; line-height: 1.1; }
+.cta-sub { font-size: 18px; color: rgba(255,255,255,0.65); margin-bottom: 48px; max-width: 520px; margin-left: auto; margin-right: auto; }
+.cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+/* ── FOOTER ── */
+footer { background: #080f22; padding: 64px 60px 32px; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+.footer-brand p { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.7; margin-top: 16px; max-width: 260px; }
+.footer-col h5 { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 20px; letter-spacing: .5px; }
+.footer-col a { display: block; color: rgba(255,255,255,0.45); font-size: 13px; margin-bottom: 10px; text-decoration: none; transition: color .2s; }
+.footer-col a:hover { color: var(--blue-light); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; }
+.footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.25); }
+
+/* ── MOBILE MENU ── */
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+.hamburger span { width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: all .3s; }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--navy); }
+::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1100px) {
+  nav { padding: 16px 28px; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  section { padding: 72px 28px; }
+  #hero { padding: 100px 28px 72px; }
+  .hero-visual { display: none; }
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .calc-wrapper { grid-template-columns: 1fr; }
+  .portal-wrapper { grid-template-columns: 1fr; }
+  .sustain-wrapper { grid-template-columns: 1fr; }
+  .sustain-visual { display: none; }
+  .trust-grid { grid-template-columns: 1fr; }
+  .blog-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .hero-stats { gap: 28px; }
+  #cta { padding: 72px 28px; }
+  footer { padding: 48px 28px 24px; }
+}
+
+@media (max-width: 600px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .eco-pillars { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .hero-stats { flex-wrap: wrap; gap: 20px; }
+  .nav-ctas .btn-ghost { display: none; }
+}
+
+/* Scroll animations */
+.fade-up { opacity: 0; transform: translateY(30px); transition: opacity .7s, transform .7s; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <svg viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="19" cy="13" r="7" fill="none" stroke="#4BA3F5" stroke-width="3.5"/>
+      <path d="M8 28 C8 20 14 16 19 16 C24 16 29 18 31 22" stroke="#0D1B3E" stroke-width="4" stroke-linecap="round" fill="none"/>
+      <path d="M10 32 L16 26 L22 30 L28 22" stroke="#2D7DD2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <path d="M28 22 L34 16" stroke="#4BA3F5" stroke-width="3" stroke-linecap="round"/>
+      <polygon points="34,16 38,12 30,14" fill="#4BA3F5"/>
+    </svg>
+    <div class="nav-logo-text">
+      <span>Moshtariat</span>
+      <span>Procurement & Logistics</span>
+    </div>
+  </a>
+
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#portal">Client Portal</a>
+    <a href="#trust">Why Us</a>
+    <a href="#sustainability">Sustainability</a>
+    <a href="#blog">Resources</a>
+  </div>
+
+  <div class="nav-ctas">
+    <a href="#portal" class="btn-ghost">Client Login</a>
+    <a href="#calculator" class="btn-primary">Free Analysis</a>
+  </div>
+  <button class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">Trusted Procurement Partner</div>
+    <h1 class="hero-title">
+      Stop Wasting <span class="accent">20% of Your Budget.</span><br>
+      We Are Your External Procurement Department.
+    </h1>
+    <p class="hero-sub">From office essentials to IT equipment — we source, consolidate, and deliver everything your startup or school needs. One partner, one invoice, zero headaches.</p>
+    <div class="hero-ctas">
+      <a href="#calculator" class="btn-hero btn-hero-primary">Request Free Savings Analysis</a>
+      <a href="#portal" class="btn-hero btn-hero-outline">Client Login →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">23<span>%</span></div>
+        <div class="stat-label">Average savings</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">180<span>+</span></div>
+        <div class="stat-label">Verified suppliers</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">1</div>
+        <div class="stat-label">Invoice per month</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero visual -->
+  <div class="hero-visual">
+    <div class="mini-card mini-card-1">
+      <div class="mini-card-label">This Month Saved</div>
+      <div class="mini-card-value">$4,280</div>
+      <div class="mini-card-change">↑ 18% vs last month</div>
+    </div>
+    <div class="mini-card mini-card-2">
+      <div class="mini-card-label">Suppliers Managed</div>
+      <div class="mini-card-value">14</div>
+      <div class="mini-card-change">All consolidated →</div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-header">
+        <span class="hero-card-title">Monthly Order Summary</span>
+        <span class="hero-card-badge">Auto-Restocked</span>
+      </div>
+      <div class="order-row">
+        <div class="order-info">
+          <div class="order-icon" style="background:rgba(45,125,210,0.15)">📋</div>
+          <div>
+            <div class="order-name">Office Stationery Pack</div>
+            <div class="order-cat">Office Essentials</div>
+          </div>
+        </div>
+        <div class="order-price">$340</div>
+      </div>
+      <div class="order-row">
+        <div class="order-info">
+          <div class="order-icon" style="background:rgba(34,197,94,0.15)">🧹</div>
+          <div>
+            <div class="order-name">Cleaning Supplies Kit</div>
+            <div class="order-cat">Facility & Cleaning</div>
+          </div>
+        </div>
+        <div class="order-price">$215</div>
+      </div>
+      <div class="order-row">
+        <div class="order-info">
+          <div class="order-icon" style="background:rgba(168,212,255,0.2)">💻</div>
+          <div>
+            <div class="order-name">IT Peripherals Bundle</div>
+            <div class="order-cat">Tech & IT Hub</div>
+          </div>
+        </div>
+        <div class="order-price">$890</div>
+      </div>
+      <div class="hero-card-footer">
+        <div>
+          <div class="card-total-label">Single Invoice Total</div>
+          <div class="card-total">$1,445 <span>/ month</span></div>
+        </div>
+        <div class="savings-pill">↓ 22% vs market</div>
+      </div>
+      <div class="mini-chart">
+        <div class="chart-bars">
+          <div class="bar" style="height:40%"></div>
+          <div class="bar" style="height:55%"></div>
+          <div class="bar" style="height:45%"></div>
+          <div class="bar" style="height:70%"></div>
+          <div class="bar active" style="height:60%"></div>
+          <div class="bar active" style="height:75%"></div>
+          <div class="bar active" style="height:80%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section id="calculator">
+  <div class="section-header center fade-up">
+    <div class="section-tag">💡 Savings Calculator</div>
+    <h2 class="section-title">How Much Could You Save?</h2>
+    <p class="section-sub">Enter your current spending and let our AI model estimate your potential savings by switching to Moshtariat.</p>
+  </div>
+  <div class="calc-wrapper fade-up">
+    <div class="calc-box">
+      <div class="calc-field">
+        <label class="calc-label">Monthly Procurement Spend (USD)</label>
+        <input class="calc-input" type="number" id="monthlySpend" value="5000" min="500" oninput="calcSavings()">
+      </div>
+      <div class="calc-field">
+        <label class="calc-label">Number of Staff: <strong id="staffCount">25</strong></label>
+        <input class="calc-slider" type="range" id="staffSlider" min="5" max="500" value="25" oninput="updateStaff(); calcSavings()">
+      </div>
+      <div class="calc-field">
+        <label class="calc-label">Organization Type</label>
+        <select class="calc-input" id="orgType" onchange="calcSavings()">
+          <option value="startup">Startup / SME</option>
+          <option value="school">School / University</option>
+          <option value="ngo">NGO / Non-Profit</option>
+          <option value="enterprise">Enterprise</option>
+        </select>
+      </div>
+      <div class="calc-field">
+        <label class="calc-label">Primary Procurement Categories</label>
+        <select class="calc-input" id="categories" onchange="calcSavings()">
+          <option value="mixed">All Categories (Mixed)</option>
+          <option value="office">Office & Stationery Heavy</option>
+          <option value="tech">Tech & IT Heavy</option>
+          <option value="facility">Facility & Cleaning Heavy</option>
+        </select>
+      </div>
+      <button class="calc-run" onclick="calcSavings()">⚡ Calculate My Savings</button>
+    </div>
+    <div class="calc-results">
+      <h3>📊 Your Savings Projection</h3>
+      <div class="result-metric">
+        <div class="result-label">Estimated Annual Savings</div>
+        <div class="result-value result-green" id="annualSavings">$14,400</div>
+        <div class="result-bar"><div class="result-bar-fill green" id="savingsBar" style="width:72%"></div></div>
+      </div>
+      <div class="result-metric">
+        <div class="result-label">Procurement Efficiency Gain</div>
+        <div class="result-value result-blue" id="efficiencyGain">38%</div>
+        <div class="result-bar"><div class="result-bar-fill blue" id="effBar" style="width:38%"></div></div>
+      </div>
+      <div class="result-metric">
+        <div class="result-label">Hours Saved per Month (Admin)</div>
+        <div class="result-value result-blue" id="hoursSaved">42 hrs</div>
+      </div>
+      <div class="result-metric">
+        <div class="result-label">Estimated ROI (Year 1)</div>
+        <div class="result-value result-green" id="roi">340%</div>
+      </div>
+      <a href="#cta" class="btn-hero btn-hero-primary" style="width:100%;display:block;text-align:center;margin-top:16px">Get Detailed Analysis →</a>
+      <div class="calc-disclaimer">* Projections are based on industry benchmarks and may vary. A free personalized analysis will give exact figures for your organization.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-header center fade-up">
+    <div class="section-tag">🏪 Product Categories</div>
+    <h2 class="section-title">Everything Your Organization Needs</h2>
+    <p class="section-sub">Browse our curated procurement categories, all sourced from our verified Golden Supplier Network.</p>
+  </div>
+  <div class="services-grid fade-up">
+    <div class="service-card">
+      <div class="service-icon">📋</div>
+      <div class="service-title">Office Essentials</div>
+      <div class="service-desc">Paper, pens, ink cartridges, folders, binders, and everything your team needs day-to-day.</div>
+      <span class="service-tag">Most Popular</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🧹</div>
+      <div class="service-title">Facility & Cleaning</div>
+      <div class="service-desc">Industrial-grade detergents, hygiene products, cleaning tools, and sanitization supplies.</div>
+      <span class="service-tag">Eco Options</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💻</div>
+      <div class="service-title">Tech & IT Hub</div>
+      <div class="service-desc">Laptop accessories, cables, peripherals, software licenses, and network hardware.</div>
+      <span class="service-tag">Fast Track</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">☕</div>
+      <div class="service-title">Hospitality Corner</div>
+      <div class="service-desc">Premium coffee, teas, office snacks, water cooler supplies, and kitchen essentials.</div>
+      <span class="service-tag">Staff Perks</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔧</div>
+      <div class="service-title">Maintenance & Repair</div>
+      <div class="service-desc">General repair kits, spare parts, facility tools, and preventive maintenance supplies.</div>
+      <span class="service-tag">On-Demand</span>
+    </div>
+  </div>
+</section>
+
+<!-- PORTAL -->
+<section id="portal">
+  <div class="portal-wrapper">
+    <div class="portal-content fade-up">
+      <div class="section-tag">🔐 Client Portal</div>
+      <h2 class="section-title" style="color:var(--white)">Your Smart Procurement Dashboard</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,.6)">Log in to your dedicated portal to manage recurring orders, approve restocks, and review your consolidated monthly invoice — all in one seamless interface.</p>
+      <div class="feature-list">
+        <div class="feature-item">
+          <div class="feature-dot">🤖</div>
+          <div class="feature-text">
+            <h4>AI-Powered Auto-Restock</h4>
+            <p>Our system learns your usage patterns and proactively suggests reorder quantities before you run out.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-dot">🧾</div>
+          <div class="feature-text">
+            <h4>Blind Invoicing</h4>
+            <p>All 10-14 suppliers consolidated into one clean invoice from Moshtariat. Your team never sees supplier names or retail prices.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-dot">📦</div>
+          <div class="feature-text">
+            <h4>Real-Time Order Tracking</h4>
+            <p>Live updates from our cross-docking center to your door, with quality inspection checkpoints at every stage.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-dot">📊</div>
+          <div class="feature-text">
+            <h4>Spend Analytics</h4>
+            <p>Monthly reports showing category breakdowns, savings achieved, and budget variance vs projections.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fade-up">
+      <div class="portal-mockup">
+        <div class="mockup-header">
+          <span class="mockup-title">📦 Smart Reorder Queue</span>
+          <span class="mockup-badge">AI Active</span>
+        </div>
+        <div class="mockup-item">
+          <div class="mockup-item-left">
+            <div class="mockup-item-icon">📄</div>
+            <div>
+              <div class="mockup-item-name">A4 Paper Reams</div>
+              <div class="mockup-item-qty">Last order: 20 boxes</div>
+            </div>
+          </div>
+          <div class="mockup-qty-control">
+            <button class="qty-btn">−</button>
+            <span class="qty-num">22</span>
+            <button class="qty-btn">+</button>
+          </div>
+        </div>
+        <div class="mockup-item">
+          <div class="mockup-item-left">
+            <div class="mockup-item-icon">🧴</div>
+            <div>
+              <div class="mockup-item-name">Hand Sanitizer 5L</div>
+              <div class="mockup-item-qty">Last order: 8 units</div>
+            </div>
+          </div>
+          <div class="mockup-qty-control">
+            <button class="qty-btn">−</button>
+            <span class="qty-num">10</span>
+            <button class="qty-btn">+</button>
+          </div>
+        </div>
+        <div class="mockup-item">
+          <div class="mockup-item-left">
+            <div class="mockup-item-icon">☕</div>
+            <div>
+              <div class="mockup-item-name">Coffee Pods (Mixed)</div>
+              <div class="mockup-item-qty">Last order: 4 boxes</div>
+            </div>
+          </div>
+          <div class="mockup-qty-control">
+            <button class="qty-btn">−</button>
+            <span class="qty-num">5</span>
+            <button class="qty-btn">+</button>
+          </div>
+        </div>
+        <div class="ai-suggestion">
+          <div class="ai-icon">✨</div>
+          <div class="ai-text"><strong>AI Suggestion:</strong> Based on your Ramadan period last year, we recommend +30% on hospitality supplies for next month. Tap to apply.</div>
+        </div>
+        <div class="invoice-strip">
+          <div>
+            <div class="invoice-label">This Month's Invoice</div>
+            <div class="invoice-value">$3,842.00</div>
+          </div>
+          <span class="invoice-tag">Blind Invoice ✓</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section id="trust">
+  <div class="section-header center fade-up">
+    <div class="section-tag">🏆 Trust & Transparency</div>
+    <h2 class="section-title">Our Commitment to Quality</h2>
+    <p class="section-sub">We built Moshtariat on radical transparency with our clients — even as we protect supplier confidentiality.</p>
+  </div>
+  <div class="trust-grid fade-up">
+    <div class="trust-card">
+      <div class="trust-num">01</div>
+      <div class="trust-icon">🥇</div>
+      <div class="trust-title">Golden Supplier List</div>
+      <div class="trust-text">Our curated network of 180+ pre-vetted suppliers is tiered by quality, reliability, and pricing. We re-evaluate every vendor quarterly. You benefit from our leverage — without us revealing who powers your supply chain.</div>
+    </div>
+    <div class="trust-card">
+      <div class="trust-num">02</div>
+      <div class="trust-icon">🔍</div>
+      <div class="trust-title">Quality Assurance Process</div>
+      <div class="trust-text">Every order passes through our cross-docking center where trained inspectors check for quantity, condition, and spec compliance before dispatch. Sub-standard items are returned immediately at no cost to you.</div>
+    </div>
+    <div class="trust-card">
+      <div class="trust-num">03</div>
+      <div class="trust-icon">🔐</div>
+      <div class="trust-title">Data & Price Confidentiality</div>
+      <div class="trust-text">Your spend data is never shared. Our blind invoicing means your finance team sees one Moshtariat invoice, preventing price-shopping by staff and eliminating maverick spend across your organization.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SUSTAINABILITY -->
+<section id="sustainability">
+  <div class="sustain-bg"></div>
+  <div class="sustain-wrapper">
+    <div class="sustain-content fade-up">
+      <div class="section-tag">🌱 Sustainability</div>
+      <h2 class="section-title" style="color:var(--white)">Procurement That Respects the Planet</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,.6)">For organizations with CSR commitments, we offer verified eco-friendly and locally-sourced alternatives across every product category.</p>
+      <div class="eco-pillars">
+        <div class="eco-card">
+          <div class="eco-emoji">🌿</div>
+          <div class="eco-title">Eco-Certified Products</div>
+          <div class="eco-text">Filter any category for FSC, ISO 14001, or Green Star certified alternatives.</div>
+        </div>
+        <div class="eco-card">
+          <div class="eco-emoji">🏭</div>
+          <div class="eco-title">Local-First Sourcing</div>
+          <div class="eco-text">We prioritize regional suppliers to reduce carbon miles and support local economies.</div>
+        </div>
+        <div class="eco-card">
+          <div class="eco-emoji">♻️</div>
+          <div class="eco-title">Packaging Reduction</div>
+          <div class="eco-text">Consolidated deliveries cut packaging waste by up to 65% versus direct supplier orders.</div>
+        </div>
+        <div class="eco-card">
+          <div class="eco-emoji">📈</div>
+          <div class="eco-title">CSR Reporting</div>
+          <div class="eco-text">Monthly sustainability reports for your CSR disclosures, ready to share with stakeholders.</div>
+        </div>
+      </div>
+    </div>
+    <div class="sustain-visual fade-up">
+      <div class="sustain-circle-outer">
+        <div class="sustain-circle-inner">
+          <div class="sustain-center-text">65% Less<br>Packaging<br>Waste</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+  <div class="section-header center fade-up">
+    <div class="section-tag">📚 Resource Hub</div>
+    <h2 class="section-title">Insights for Smarter Operations</h2>
+    <p class="section-sub">Educational content for procurement managers, startup founders, and school administrators.</p>
+  </div>
+  <div class="blog-grid fade-up">
+    <div class="blog-card featured">
+      <div class="blog-thumb">
+        <div class="blog-thumb-pattern"></div>
+        <div class="blog-thumb-icon">📊</div>
+      </div>
+      <div class="blog-body">
+        <div class="blog-cat">Case Study</div>
+        <div class="blog-title">How Al-Nour Academy Cut Procurement Costs by 31% in One Semester</div>
+        <div class="blog-excerpt">A mid-sized private school with 800 students was spending 40+ staff-hours monthly on procurement. After switching to Moshtariat, their admin team was freed to focus on educational outcomes. Here's the full breakdown.</div>
+        <div class="blog-meta">
+          <span>12 min read</span>
+          <span>Supply Chain</span>
+        </div>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-thumb">
+        <div class="blog-thumb-pattern"></div>
+        <div class="blog-thumb-icon">🚀</div>
+      </div>
+      <div class="blog-body">
+        <div class="blog-cat">Startup Guide</div>
+        <div class="blog-title">The Startup Founder's Guide to Procurement Budgeting</div>
+        <div class="blog-excerpt">Why most early-stage startups overspend on operational supplies by 25%+, and how to fix it fast.</div>
+        <div class="blog-meta">
+          <span>7 min read</span>
+          <span>Finance</span>
+        </div>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-thumb">
+        <div class="blog-thumb-pattern"></div>
+        <div class="blog-thumb-icon">⛓️</div>
+      </div>
+      <div class="blog-body">
+        <div class="blog-cat">Supply Chain</div>
+        <div class="blog-title">5 Metrics Every Operations Manager Should Track Monthly</div>
+        <div class="blog-excerpt">From purchase order cycle time to supplier fill rate — the KPIs that separate efficient teams from chaotic ones.</div>
+        <div class="blog-meta">
+          <span>5 min read</span>
+          <span>Operations</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-inner">
+    <h2 class="cta-title">Ready to Reclaim That<br><span style="background:linear-gradient(90deg,var(--blue-light),#89CFFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent">20% of Your Budget?</span></h2>
+    <p class="cta-sub">Join 200+ startups and schools who've outsourced their procurement to Moshtariat. Setup takes 48 hours. Savings start immediately.</p>
+    <div class="cta-btns">
+      <a href="#calculator" class="btn-hero btn-hero-primary">Request Free Savings Analysis</a>
+      <a href="#portal" class="btn-hero btn-hero-outline">Client Login</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo" style="margin-bottom:0">
+        <svg viewBox="0 0 42 42" width="38" height="38" fill="none">
+          <circle cx="19" cy="13" r="7" fill="none" stroke="#4BA3F5" stroke-width="3.5"/>
+          <path d="M8 28 C8 20 14 16 19 16 C24 16 29 18 31 22" stroke="#162550" stroke-width="4" stroke-linecap="round" fill="none"/>
+          <path d="M10 32 L16 26 L22 30 L28 22" stroke="#2D7DD2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M28 22 L34 16" stroke="#4BA3F5" stroke-width="3" stroke-linecap="round"/>
+          <polygon points="34,16 38,12 30,14" fill="#4BA3F5"/>
+        </svg>
+        <div class="nav-logo-text">
+          <span style="font-size:16px">Moshtariat</span>
+          <span>Procurement & Logistics</span>
+        </div>
+      </a>
+      <p>Your external procurement department. We source, consolidate, and deliver — so you can focus on what matters.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <a href="#">Office Essentials</a>
+      <a href="#">Facility & Cleaning</a>
+      <a href="#">Tech & IT Hub</a>
+      <a href="#">Hospitality Corner</a>
+      <a href="#">Maintenance & Repair</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="#">About Us</a>
+      <a href="#">Supplier Network</a>
+      <a href="#">Sustainability</a>
+      <a href="#">Careers</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h5>Resources</h5>
+      <a href="#">Blog & Insights</a>
+      <a href="#">Case Studies</a>
+      <a href="#">Savings Calculator</a>
+      <a href="#">Client Portal</a>
+      <a href="#">Support</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Moshtariat Procurement & Logistics. All rights reserved.</p>
+    <p>Privacy Policy · Terms of Service · Supplier Program</p>
+  </div>
+</footer>
+
+<script>
+// Calculator logic
+function updateStaff() {
+  document.getElementById('staffCount').textContent = document.getElementById('staffSlider').value;
+}
+
+function calcSavings() {
+  const spend = parseFloat(document.getElementById('monthlySpend').value) || 5000;
+  const staff = parseInt(document.getElementById('staffSlider').value) || 25;
+  const org = document.getElementById('orgType').value;
+  const cat = document.getElementById('categories').value;
+
+  let savingsRate = 0.20;
+  if (org === 'school') savingsRate = 0.24;
+  if (org === 'ngo') savingsRate = 0.18;
+  if (org === 'enterprise') savingsRate = 0.15;
+  if (cat === 'office') savingsRate += 0.03;
+  if (cat === 'tech') savingsRate -= 0.02;
+
+  const monthlySavings = spend * savingsRate;
+  const annualSavings = monthlySavings * 12;
+  const efficiency = Math.round(25 + (staff / 10) + (savingsRate * 100));
+  const hours = Math.round(staff * 1.5 + 20);
+  const roi = Math.round((annualSavings / (spend * 0.05)) * 100);
+
+  document.getElementById('annualSavings').textContent = '$' + annualSavings.toLocaleString('en-US', {maximumFractionDigits:0});
+  document.getElementById('efficiencyGain').textContent = Math.min(efficiency, 65) + '%';
+  document.getElementById('hoursSaved').textContent = hours + ' hrs';
+  document.getElementById('roi').textContent = Math.min(roi, 520) + '%';
+  document.getElementById('savingsBar').style.width = Math.min(savingsRate * 400, 95) + '%';
+  document.getElementById('effBar').style.width = Math.min(efficiency, 65) + '%';
+}
+
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Mobile menu
+function toggleMenu() {
+  const links = document.querySelector('.nav-links');
+  if (links.style.display === 'flex') {
+    links.style.display = 'none';
+  } else {
+    links.style.cssText = 'display:flex;flex-direction:column;position:fixed;top:72px;left:0;right:0;background:rgba(13,27,62,0.98);padding:24px 28px;gap:20px;z-index:998;backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.08)';
+  }
+}
+
+// Init
+calcSavings();
+</script>
+</body>
+</html>
